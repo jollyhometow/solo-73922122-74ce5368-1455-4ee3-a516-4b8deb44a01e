@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>跳转后的厂商文档</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>厂商诊断页 · 跳转后的新文档</h1>
+  </header>
+  <main class="panel">
+    <p class="hint">
+      这是页内跳转后加载的<b>全新文档</b>（新的浏览上下文生命周期）。
+      门户已因 iframe load 事件推进世代，旧文档在途申请全部失效；
+      即使旧取数请求此刻才返回，门户也会丢弃结果，本页不会收到任何旧数据。
+    </p>
+    <p>本页 docId：<code id="doc-id"></code></p>
+    <h2>通信记录</h2>
+    <div id="comm-log" class="event-log"></div>
+    <div class="row">
+      <button id="btn-back" type="button">返回诊断页（再次重新绑定）</button>
+    </div>
+  </main>
+  <script src="/navigated.js"></script>
+</body>
+</html>

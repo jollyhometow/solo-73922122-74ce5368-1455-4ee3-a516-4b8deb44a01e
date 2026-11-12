@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>厂商远程诊断页（获准来源）</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>厂商远程诊断页</h1>
+    <div class="origins">
+      <span>本页源 <b id="self-origin">…</b></span>
+      <span>门户源 <b id="portal-origin">…</b></span>
+    </div>
+  </header>
+
+  <main class="panel">
+    <p class="hint" id="bind-status">尚未与门户建立绑定。</p>
+    <p>门户选定设备：<b id="device-name">—</b></p>
+    <p>门户设定取数延迟：<b id="delay-value">—</b> 秒</p>
+    <p>本文档标识 docId：<code id="doc-id">—</code>（每次加载重新生成并重新绑定）</p>
+
+    <h2>诊断操作</h2>
+    <div class="row">
+      <button id="btn-request" type="button" class="primary">申请最近 20 条脱敏日志</button>
+      <button id="btn-direct-fetch" type="button" class="warn">直接 fetch 门户日志接口（应失败）</button>
+    </div>
+    <div class="row">
+      <button id="btn-open-probe" type="button">打开本厂商源旁窗（同源冒充演示）</button>
+      <button id="btn-navigate" type="button" class="warn">页内跳转（演示旧申请/迟到结果作废）</button>
+    </div>
+
+    <h2>通信记录</h2>
+    <div id="comm-log" class="event-log"></div>
+
+    <h2>脱敏日志结果</h2>
+    <pre id="log-output" class="log-output">（尚未取得数据）</pre>
+  </main>
+
+  <script src="/vendor.js"></script>
+</body>
+</html>

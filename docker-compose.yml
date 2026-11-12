@@ -1,0 +1,51 @@
+# 三源演示台：门户 / 获准厂商 / 未获准站点分别使用不同源（不同端口即不同 origin）。
+# 启动：docker compose up --build
+# 入口：浏览器打开 http://localhost:8080
+services:
+  portal:
+    build: ./app
+    environment:
+      APP_ROLE: portal
+      SELF_ORIGIN: http://localhost:8080
+      PORTAL_ORIGIN: http://localhost:8080
+      VENDOR_ORIGIN: http://localhost:8081
+      ROGUE_ORIGIN: http://localhost:8082
+    ports:
+      - "8080:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/healthz')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  vendor:
+    build: ./app
+    environment:
+      APP_ROLE: vendor
+      SELF_ORIGIN: http://localhost:8081
+      PORTAL_ORIGIN: http://localhost:8080
+      VENDOR_ORIGIN: http://localhost:8081
+      ROGUE_ORIGIN: http://localhost:8082
+    ports:
+      - "8081:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/healthz')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  rogue:
+    build: ./app
+    environment:
+      APP_ROLE: rogue
+      SELF_ORIGIN: http://localhost:8082
+      PORTAL_ORIGIN: http://localhost:8080
+      VENDOR_ORIGIN: http://localhost:8081
+      ROGUE_ORIGIN: http://localhost:8082
+    ports:
+      - "8082:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/healthz')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5

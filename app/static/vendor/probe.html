@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>厂商源旁窗 · 冒充测试</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>厂商源旁窗（与 iframe 同源的其他窗口）</h1>
+  </header>
+  <main class="panel">
+    <p class="hint">
+      本窗口与门户内嵌的厂商 iframe <b>同源</b>，postMessage 的 origin 能通过固定白名单；
+      但它不是 iframe 本身。门户还会校验 <code>event.source === iframe.contentWindow</code>
+      与文档标识，因此同源其他窗口同样无法冒充。
+    </p>
+    <div class="row">
+      <button id="btn-spoof-request" type="button" class="warn">冒充 iframe 发送日志申请</button>
+      <button id="btn-spoof-hello" type="button" class="warn">冒充 iframe 发送 hello 握手</button>
+    </div>
+    <h2>结果</h2>
+    <div id="out" class="event-log"></div>
+  </main>
+  <script src="/probe.js"></script>
+</body>
+</html>

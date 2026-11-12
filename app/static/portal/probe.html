@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>同源旁窗 · 冒充测试</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>同源旁窗（门户自己的源）</h1>
+  </header>
+  <main class="panel">
+    <p class="hint">
+      本页面与值班门户同源，postMessage 的 <code>event.origin</code> 完全合法；
+      但它不是门户里那个 iframe 文档。点击下面的按钮冒充厂商 iframe 发申请，
+      门户的“来源窗口 + 文档标识”双重校验应当拒绝它。
+    </p>
+    <p>门户源：<b id="portal-origin"></b></p>
+    <p>本窗口 opener：<b id="opener-state"></b></p>
+    <div class="row">
+      <button id="btn-spoof-request" type="button" class="warn">冒充 iframe 发送日志申请</button>
+      <button id="btn-spoof-hello" type="button" class="warn">冒充厂商文档发 hello 握手</button>
+    </div>
+    <h2>结果</h2>
+    <div id="out" class="event-log"></div>
+  </main>
+  <script src="/probe.js"></script>
+</body>
+</html>

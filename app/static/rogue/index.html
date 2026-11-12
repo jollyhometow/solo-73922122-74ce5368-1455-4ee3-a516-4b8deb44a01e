@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>未获准第三方站点</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar danger">
+    <h1>未获准第三方站点（固定白名单之外的源）</h1>
+  </header>
+  <main class="panel">
+    <p>本页源：<b id="self-origin">…</b></p>
+    <p class="hint">
+      本页不在门户的固定 origin 白名单中。无论本页是被嵌入门户 iframe，
+      还是作为旁窗向门户发消息，门户的第一道 origin 校验就会拒绝；
+      直接调用门户日志接口也会因无令牌 / 无 CORS 许可而失败。
+    </p>
+    <h2>攻击演示</h2>
+    <div class="row">
+      <button id="btn-request" type="button" class="warn">向门户发送日志申请</button>
+      <button id="btn-hello" type="button" class="warn">冒充厂商发 hello 握手</button>
+      <button id="btn-direct" type="button" class="warn">直接 fetch 门户日志接口</button>
+    </div>
+    <h2>结果</h2>
+    <div id="out" class="event-log"></div>
+  </main>
+  <script src="/rogue.js"></script>
+</body>
+</html>
